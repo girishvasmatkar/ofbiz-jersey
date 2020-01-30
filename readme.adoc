@@ -1,0 +1,46 @@
+////
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+////
+= JAX-RS (Jersey) Apache OFBiz® plugin
+
+The Jersey plugin is one of the OFBiz plugins that provides a way to configure Jersey (JAX-RI) to allow developers to define their own REST APIs. It also integrates with Swagger-UI to generate API Docs. The plug-in comes with JWT Authentication enabled via javax.ws.rs.NameBinding (@Secured Annotation).
+
+== OFBiz REST API based on JSR 339: JAX-RS 2.0
+JAX-RS stands for Java API for RESTful Web Services and is a specification that provides support in creating web services according to the Representational State Transfer architectural pattern. 
+
+=== Technical Documentation
+The following section describes varios technical details pertaining to authentication, endpoint URLs and swagger documentation.
+
+==== Important URLs
+* API https://localhost:8443/api
+* WADL https://localhost:8443/api/application.wadl
+* Swagger UI https://localhost:8443/api/swagger/swagger-ui.html
+
+==== Endpoints
+The plug-in has three endpoints for demonstrating how to create new endpoints.
+
+* GET /api/entities
+* GET /api/entities/{name} 
+* PUT /api/entities/import Accept: application/xml
+
+==== Authentication
+All three demo endpoints are secured. Authentication scheme is "Bearer <JWT>". Every request to the three API endpoints must have an Authorization header associated with it. 
+Example -
+
+GET /api/entities/AcctgTrans HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJBcGFjaGVPRkJpeiIsImlhdCI6MTU0NzczOTM0OCwiZXhwIjoxNjc5Mjc1MzQ4LCJhdWQiOiJ3d3cuZXhhbXBsZS5jb20iLCJzdWIiOiJqcm9ja2V0QGV4YW1wbGUuY29tIiwiR2l2ZW5OYW1lIjoiSm9obm55IiwiU3VybmFtZSI6IlJvY2tldCIsIkVtYWlsIjoianJvY2tldEBleGFtcGxlLmNvbSIsInVzZXJMb2dpbklkIjoiYWRtaW4iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.fwafgrgpodBJcXxNTQdZknKeWKb3sDOsQrcR2vcRw97FznD6mkE79p10Tu7cqpUx7LiXuROUAnXEgqDice-BSg 
